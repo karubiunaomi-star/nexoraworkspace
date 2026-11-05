@@ -10,6 +10,7 @@ import { LEARNING_TABS, LearningLayout } from "@/workspace/LearningPanes";
 import {
   ChevronDown,
   Code2,
+  Download,
   GitBranch,
   GraduationCap,
   LockKeyhole,
@@ -180,6 +181,15 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
             />
             {controller.syncing ? "Syncing" : live ? "Live" : "Local"}
           </span>
+          <a
+            href="/nexora-omega.zip"
+            download="nexora-omega.zip"
+            title="Download source (.zip)"
+            aria-label="Download source zip"
+            className="aurora-focus hidden size-7 items-center justify-center rounded-md border border-[var(--a-line)] text-[var(--a-muted)] transition-colors hover:border-[var(--a-line-strong)] hover:text-[var(--a-text)] sm:flex"
+          >
+            <Download className="size-3.5" />
+          </a>
           <button
             type="button"
             onClick={openEngineering}
