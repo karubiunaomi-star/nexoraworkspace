@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AURORA_BREAKPOINT, PANE_LIMITS } from "@/nexora/layout";
+import { NexoraEmblem } from "@/nexora/NexoraEmblem";
 import type { NexoraController } from "@/nexora/useNexora";
 import { useNexora } from "@/nexora/useNexora";
 import { useMediaQuery } from "@/nexora/useMediaQuery";
@@ -39,17 +40,7 @@ function taskStateLabel(task: NexoraTask | null) {
 }
 
 function WorkspaceMark({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        "flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--a-mint)] text-[12px] font-bold text-[#05141c]",
-        className,
-      )}
-      aria-hidden="true"
-    >
-      N
-    </span>
-  );
+  return <NexoraEmblem className={cn("size-7", className)} />;
 }
 
 export function WorkspaceStatusBar({
@@ -158,6 +149,9 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
             </span>
             <span className="hidden shrink-0 text-[12px] text-[var(--a-muted)] sm:inline">
               Workspace
+            </span>
+            <span className="hidden shrink-0 font-mono text-[8px] tracking-[0.2em] text-[var(--a-ice)]/80 uppercase xl:inline">
+              Omega
             </span>
           </div>
           <span className="mx-1 h-4 w-px shrink-0 bg-[var(--a-line)]" />

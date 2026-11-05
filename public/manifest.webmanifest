@@ -1,11 +1,11 @@
 {
-  "name": "freebuff.com application",
-  "short_name": "freebuff.com",
-  "description": "freebuff.com application",
+  "name": "Nexora Omega — Aurora Workspace",
+  "short_name": "Nexora",
+  "description": "One Aurora desktop with a unified Learning and Engineering workspace.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#090D16",
+  "theme_color": "#090D16",
   "icons": [
     {
       "src": "/logo.svg",

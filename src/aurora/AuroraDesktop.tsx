@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { WORKSPACE_FILES } from "@/nexora/files";
+import { NexoraEmblem } from "@/nexora/NexoraEmblem";
 import { KeyValue } from "@/nexora/ui";
 import { cn } from "@/lib/utils";
 import {
@@ -71,32 +72,7 @@ function initialGeometry(id: WindowId): { x: number; y: number; w: number; h: nu
 }
 
 function NexoraMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id="nx-mark" x1="4" y1="26" x2="28" y2="6">
-          <stop stopColor="#22d3ee" />
-          <stop offset="0.55" stopColor="#67e8f9" />
-          <stop offset="1" stopColor="#8b5cf6" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M16 2.8 28 9.4v13.2L16 29.2 4 22.6V9.4L16 2.8Z"
-        fill="none"
-        stroke="url(#nx-mark)"
-        strokeWidth="1.2"
-      />
-      <path
-        d="M16 9.2 22 12.6v6.8L16 22.8 10 19.4v-6.8L16 9.2Z"
-        fill="none"
-        stroke="url(#nx-mark)"
-        strokeWidth="0.8"
-        opacity="0.7"
-      />
-      <circle cx="16" cy="16" r="1.7" fill="url(#nx-mark)" />
-      <path d="M4.8 15.9h5M22.2 15.9h5" stroke="url(#nx-mark)" strokeWidth="0.7" opacity="0.6" />
-    </svg>
-  );
+  return <NexoraEmblem className={className} />;
 }
 
 const ACCENTS = {
@@ -633,14 +609,18 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 top-[16%] flex flex-col items-center text-center">
-          <p className="font-mono text-[9px] tracking-[0.5em] text-[var(--a-mint)]/55 uppercase">
-            geometric nucleus · online
+        <div className="pointer-events-none absolute inset-x-0 top-[13%] flex flex-col items-center text-center">
+          <NexoraEmblem className="size-[76px] drop-shadow-[0_0_28px_rgba(34,211,238,0.35)]" />
+          <p className="mt-3 font-mono text-[10px] tracking-[0.5em] text-[var(--a-text)]/90 uppercase">
+            Nexora<span className="ml-1.5 text-[var(--a-ice)]">Omega</span>
           </p>
-          <h1 className="aurora-display mt-4 bg-[linear-gradient(100deg,#e5e7eb_8%,#a5f3fc_46%,#22d3ee_62%,#8b5cf6_96%)] bg-clip-text text-[clamp(3rem,9vw,7rem)] leading-none text-transparent opacity-90">
+          <p className="mt-1.5 font-mono text-[7px] tracking-[0.34em] text-[var(--a-muted)] uppercase">
+            A higher layer of tomorrow
+          </p>
+          <h1 className="aurora-display mt-4 bg-[linear-gradient(100deg,#e5e7eb_8%,#a5f3fc_46%,#22d3ee_62%,#8b5cf6_96%)] bg-clip-text text-[clamp(3rem,8vw,6.25rem)] leading-none text-transparent opacity-90">
             AURORA
           </h1>
-          <p className="mt-4 max-w-md px-6 text-[12px] leading-relaxed text-[var(--a-text)]/45">
+          <p className="mt-3 max-w-md px-6 text-[12px] leading-relaxed text-[var(--a-text)]/45">
             One desktop. One workspace window. Learning reads. Engineering proposes.
             A founder decides.
           </p>
