@@ -64,7 +64,7 @@ export function TabBar<T extends string>({
       role="tablist"
       aria-label={ariaLabel}
       className={cn(
-        "flex h-11 shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] bg-[#0d0d0f] px-2",
+        "flex h-11 shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] bg-[#0b1120] px-2",
         className,
       )}
     >
@@ -98,16 +98,16 @@ export function TabBar<T extends string>({
 }
 
 const statusTone: Record<string, string> = {
-  indexed: "border-[#8fe3aa]/25 bg-[#8fe3aa]/10 text-[#a8edbc]",
-  "read-only": "border-white/10 bg-white/[0.04] text-[#a3a3a8]",
-  attached: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
-  unverified: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
-  cached: "border-[#a9bde8]/25 bg-[#a9bde8]/10 text-[#c4d3f2]",
-  unavailable: "border-[#ff9a8b]/25 bg-[#ff9a8b]/10 text-[#ffb3a8]",
-  proposed: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
-  approved: "border-[#a9bde8]/25 bg-[#a9bde8]/10 text-[#c4d3f2]",
-  applied: "border-[#8fe3aa]/25 bg-[#8fe3aa]/10 text-[#a8edbc]",
-  rejected: "border-[#ff9a8b]/25 bg-[#ff9a8b]/10 text-[#ffb3a8]",
+  indexed: "border-[#34d399]/25 bg-[#34d399]/10 text-[#6ee7b7]",
+  "read-only": "border-[#64748b]/30 bg-[#64748b]/10 text-[#94a3b8]",
+  attached: "border-[#fbbf24]/25 bg-[#fbbf24]/10 text-[#fcd34d]",
+  unverified: "border-[#fbbf24]/25 bg-[#fbbf24]/10 text-[#fcd34d]",
+  cached: "border-[#8b5cf6]/30 bg-[#8b5cf6]/10 text-[#c4b5fd]",
+  unavailable: "border-[#f87171]/25 bg-[#f87171]/10 text-[#fca5a5]",
+  proposed: "border-[#fbbf24]/25 bg-[#fbbf24]/10 text-[#fcd34d]",
+  approved: "border-[#8b5cf6]/30 bg-[#8b5cf6]/10 text-[#c4b5fd]",
+  applied: "border-[#34d399]/25 bg-[#34d399]/10 text-[#6ee7b7]",
+  rejected: "border-[#f87171]/25 bg-[#f87171]/10 text-[#fca5a5]",
 };
 
 export function StatusChip({
@@ -190,10 +190,10 @@ export function CodeView({
                 (highlight.tone === "added" ? "aurora-diff-add" : "aurora-diff-remove"),
             )}
           >
-            <span className="sticky left-0 w-10 shrink-0 select-none border-r border-[var(--a-line)] bg-[#0b0b0d] pr-2 text-right text-[9px] leading-[1.95] text-[#64646a]">
+            <span className="sticky left-0 w-10 shrink-0 select-none border-r border-[var(--a-line)] bg-[#090d16] pr-2 text-right text-[9px] leading-[1.95] text-[#475569]">
               {startLine + index}
             </span>
-            <span className="whitespace-pre px-3 text-[#d5d5d2]">{line || " "}</span>
+            <span className="whitespace-pre px-3 text-[#dbe1ea]">{line || " "}</span>
           </span>
         ))}
       </code>
@@ -219,10 +219,10 @@ export function DiffBlock({
           <span
             className={cn(
               "size-1.5 rounded-full",
-              isBefore ? "bg-[#ff8a7a]" : "bg-[#8be6b0]",
+              isBefore ? "bg-[#f87171]" : "bg-[#34d399]",
             )}
           />
-          <span className={isBefore ? "text-[#ffb3a8]" : "text-[#b6f5cc]"}>{label}</span>
+          <span className={isBefore ? "text-[#fca5a5]" : "text-[#6ee7b7]"}>{label}</span>
         </span>
         <span className="font-mono text-[9px] text-[var(--a-muted)]">
           {lines.length} lines
@@ -234,7 +234,7 @@ export function DiffBlock({
             <span className="w-5 shrink-0 select-none text-[10px] opacity-45">
               {isBefore ? "−" : "+"}
             </span>
-            <span className={cn("whitespace-pre", isBefore ? "text-[#e8b3aa]" : "text-[#b9e8c9]")}>
+            <span className={cn("whitespace-pre", isBefore ? "text-[#fca5a5]" : "text-[#86efac]")}>
               {line || " "}
             </span>
           </div>

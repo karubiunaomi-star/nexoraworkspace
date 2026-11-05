@@ -81,7 +81,7 @@ function FilesPane({
   return (
     <div
       data-pane="files"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
       <PaneHeader
         icon={FolderTree}
@@ -171,7 +171,7 @@ function CodePane({
   return (
     <div
       data-pane="code"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
       <PaneHeader
         icon={Code2}
@@ -186,7 +186,7 @@ function CodePane({
               className={cn(
                 "flex items-center gap-1 rounded-sm border px-1.5 py-0.5 font-mono text-[7.5px] tracking-[0.1em] uppercase",
                 patched
-                  ? "border-[var(--a-mint)]/30 bg-[var(--a-mint)]/10 text-[var(--a-mint)]"
+                  ? "border-[var(--a-green)]/30 bg-[var(--a-green)]/10 text-[var(--a-green)]"
                   : "border-[var(--a-line)] text-[var(--a-muted)]",
               )}
             >
@@ -215,7 +215,7 @@ function CodePane({
         <span className="flex items-center gap-1">
           {changed ? (
             <>
-              <span className="size-1 rounded-full bg-[var(--a-mint)]" />
+              <span className="size-1 rounded-full bg-[var(--a-green)]" />
               in-app buffer · repository unchanged
             </>
           ) : (
@@ -290,7 +290,7 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
   return (
     <div
       data-pane="ai"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
       <PaneHeader
         icon={Sparkles}
@@ -322,7 +322,7 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
                     </>
                   ) : (
                     <>
-                      <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-amber)]/15 text-[8px] font-semibold text-[var(--a-amber)]">
+                      <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-ice)]/15 text-[8px] font-semibold text-[var(--a-ice)]">
                         Y
                       </span>
                       <span className="font-medium text-[var(--a-text)]/90">You</span>
@@ -360,7 +360,7 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
                   key={step}
                   className="flex items-start gap-1.5 text-[10px] leading-relaxed text-[var(--a-muted)]"
                 >
-                  <span className="mt-px flex size-3.5 shrink-0 items-center justify-center rounded-sm border border-[var(--a-line)] font-mono text-[7px] text-[var(--a-mint)]/80">
+                  <span className="mt-px flex size-3.5 shrink-0 items-center justify-center rounded-sm border border-[var(--a-ice)]/25 bg-[var(--a-ice)]/10 font-mono text-[7px] text-[var(--a-ice)]/90">
                     {index + 1}
                   </span>
                   {step}
@@ -392,18 +392,18 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
               </div>
 
               {isApplied ? (
-                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[var(--a-mint)]/85">
+                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[var(--a-green)]/90">
                   <BadgeCheck className="mt-0.5 size-3 shrink-0" />
                   Applied by {task.approvedBy ?? "founder"} · in-app buffer updated,
                   repository unchanged, audit recorded.
                 </p>
               ) : isRejected ? (
-                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[#ffb3a8]">
+                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[#fca5a5]">
                   <X className="mt-0.5 size-3 shrink-0" />
                   Rejected. No change will be executed.
                 </p>
               ) : task.status === "approved" ? (
-                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[#c3e8f2]">
+                <p className="mt-2 flex items-start gap-1.5 text-[10px] leading-relaxed text-[#c4b5fd]">
                   <Check className="mt-0.5 size-3 shrink-0" />
                   Approved by {task.approvedBy}. APPLY is now unlocked; execution
                   is a separate server mutation.
@@ -451,18 +451,18 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
                   data-action="reject"
                   onClick={() => void reject()}
                   disabled={!task || isApplied || isRejected || controller.pending}
-                  className="aurora-focus ml-auto flex items-center gap-1 rounded-sm px-1.5 py-1 font-mono text-[8px] tracking-[0.08em] text-[var(--a-muted)] uppercase transition-colors hover:bg-[#ff8a7a]/10 hover:text-[#ffb3a8] disabled:opacity-35"
+                  className="aurora-focus ml-auto flex items-center gap-1 rounded-sm px-1.5 py-1 font-mono text-[8px] tracking-[0.08em] text-[var(--a-muted)] uppercase transition-colors hover:bg-[#f87171]/10 hover:text-[#fca5a5] disabled:opacity-35"
                 >
                   <X className="size-2.5" /> reject
                 </button>
               </div>
 
               {controller.mode === "guest" ? (
-                <p className="mt-2 border-t border-[var(--a-line)] pt-1.5 text-[9.5px] leading-relaxed text-[var(--a-amber)]/80">
+                <p className="mt-2 border-t border-[var(--a-line)] pt-1.5 text-[9.5px] leading-relaxed text-[var(--a-muted)]">
                   Guest preview: these approvals are local only.{" "}
                   <Link
                     to="/auth?returnTo=/dashboard"
-                    className="underline underline-offset-2 hover:text-[var(--a-amber)]"
+                    className="underline underline-offset-2 hover:text-[var(--a-text)]"
                   >
                     Sign in as founder
                   </Link>{" "}
@@ -489,13 +489,13 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
       </div>
 
       {/* prompt box pinned to the bottom of the AI pane */}
-      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#0b0b0d] p-2">
+      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#090d16] p-2">
         <form
           onSubmit={(event) => {
             event.preventDefault();
             void submit();
           }}
-          className="rounded-xl border border-[var(--a-line-strong)] bg-[#141416] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
+          className="rounded-xl border border-[var(--a-line-strong)] bg-[#111827] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
         >
           <textarea
             value={draft}
@@ -556,7 +556,7 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
           className={cn(
             "shrink-0 rounded-md border px-1.5 py-0.5 font-mono text-[8.5px] tracking-[0.06em] uppercase",
             applied
-              ? "border-[var(--a-mint)]/30 bg-[var(--a-mint)]/10 text-[var(--a-mint)]"
+              ? "border-[var(--a-green)]/30 bg-[var(--a-green)]/10 text-[var(--a-green)]"
               : "border-[var(--a-line)] text-[var(--a-muted)]",
           )}
         >
@@ -564,7 +564,7 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
         </span>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-[var(--a-line-strong)] bg-[#0b0b0d]">
+      <div className="overflow-hidden rounded-lg border border-[var(--a-line-strong)] bg-[#090d16]">
         <div className="flex items-center justify-between border-b border-[var(--a-line)] px-2.5 py-1.5">
           <span className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.16em] text-[var(--a-text)]/75 uppercase">
             <span className="size-1.5 rounded-full bg-[var(--a-mint)]" />
@@ -572,7 +572,7 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
           </span>
           <span className="font-mono text-[7px] text-[var(--a-muted)]">1440 × 900</span>
         </div>
-        <div className="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_100%,rgba(80,180,140,0.16),transparent_65%),#08080a] p-3">
+        <div className="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_100%,rgba(34,211,238,0.14),transparent_65%),#090d16] p-3">
           <div className="flex items-center justify-between font-mono text-[6.5px] tracking-[0.16em] text-[var(--a-muted)] uppercase">
             <span>Nexora / Aurora</span>
             <span className="flex items-center gap-1">
@@ -757,9 +757,9 @@ function EngineeringOutputPane({ controller }: { controller: NexoraController })
   return (
     <div
       data-pane="engineering-output"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
-      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0d0d0f] pr-3">
+      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0b1120] pr-3">
         <TabBar
           ariaLabel="Engineering output"
           tabs={OUTPUT_TABS}

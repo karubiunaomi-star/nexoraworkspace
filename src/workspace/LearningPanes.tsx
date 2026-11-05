@@ -97,14 +97,14 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         {assistant ? (
           <>
             <span className="flex size-4 shrink-0 items-center justify-center rounded bg-white/[0.06]">
-              <Sparkles className="size-2.5 text-[var(--a-mint)]" />
+              <Sparkles className="size-2.5 text-[var(--a-ice)]" />
             </span>
             <span className="font-medium text-[var(--a-text)]/90">Nexora</span>
             <span className="text-[var(--a-muted)]/70">plan engine</span>
           </>
         ) : (
           <>
-            <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-amber)]/15 text-[8px] font-semibold text-[var(--a-amber)]">
+            <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-ice)]/15 text-[8px] font-semibold text-[var(--a-ice)]">
               Y
             </span>
             <span className="font-medium text-[var(--a-text)]/90">You</span>
@@ -189,7 +189,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
   return (
     <div
       data-pane="conversation"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
       <PaneHeader
         icon={MessagesSquare}
@@ -200,7 +200,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
             <span
               className={cn(
                 "size-1 rounded-full",
-                controller.mode === "founder" ? "bg-[var(--a-mint)]" : "bg-[var(--a-amber)]",
+                controller.mode === "founder" ? "bg-[var(--a-mint)]" : "bg-[var(--a-muted)]",
               )}
             />
             {controller.mode === "founder" ? "live" : "guest"}
@@ -238,15 +238,15 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
         <div className="h-1" />
       </div>
 
-      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#0b0b0d] p-2">
+      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#090d16] p-2">
         {attachments.length > 0 ? (
           <div className="mb-1.5 flex flex-wrap gap-1">
             {attachments.map((item) => (
               <span
                 key={item.name}
-                className="flex items-center gap-1 rounded-sm border border-[var(--a-amber)]/25 bg-[var(--a-amber)]/[0.06] px-1.5 py-1 font-mono text-[9px] text-[var(--a-text)]/80"
+                className="flex items-center gap-1 rounded-md border border-[var(--a-ice)]/25 bg-[var(--a-ice)]/[0.08] px-1.5 py-1 font-mono text-[9px] text-[var(--a-text)]/80"
               >
-                <Paperclip className="size-2.5 text-[var(--a-amber)]/80" />
+                <Paperclip className="size-2.5 text-[var(--a-ice)]" />
                 {item.name}
                 <button
                   type="button"
@@ -270,7 +270,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
             event.preventDefault();
             void submit();
           }}
-          className="rounded-xl border border-[var(--a-line-strong)] bg-[#141416] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
+          className="rounded-xl border border-[var(--a-line-strong)] bg-[#111827] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
         >
           <textarea
             value={draft}
@@ -402,8 +402,8 @@ function ReportTab({ controller }: { controller: NexoraController }) {
         </ul>
       </div>
 
-      <div className="rounded-sm border border-[var(--a-amber)]/20 bg-[var(--a-amber)]/[0.04] p-2.5">
-        <p className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.14em] text-[var(--a-amber)]/85 uppercase">
+      <div className="rounded-lg border border-[var(--a-ice)]/25 bg-[var(--a-ice)]/[0.06] p-2.5">
+        <p className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.14em] text-[var(--a-ice)]/90 uppercase">
           <LockKeyhole className="size-2.5" /> boundary
         </p>
         <p className="mt-1.5 text-[11px] leading-relaxed text-[var(--a-text)]/70">
@@ -528,7 +528,7 @@ function KnowledgeTab({ controller }: { controller: NexoraController }) {
             onChange={(event) => setTitle(event.target.value)}
             placeholder="Note title"
             aria-label="Knowledge note title"
-            className="w-full rounded-md border border-[var(--a-line)] bg-[#0f0f11] px-2 py-1.5 text-[11.5px] text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
+            className="w-full rounded-md border border-[var(--a-line)] bg-[#0b1120] px-2 py-1.5 text-[11.5px] text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
           />
           <textarea
             value={body}
@@ -536,7 +536,7 @@ function KnowledgeTab({ controller }: { controller: NexoraController }) {
             rows={3}
             placeholder="What should persist for the next session?"
             aria-label="Knowledge note body"
-            className="w-full resize-none rounded-md border border-[var(--a-line)] bg-[#0f0f11] px-2 py-1.5 text-[11.5px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
+            className="w-full resize-none rounded-md border border-[var(--a-line)] bg-[#0b1120] px-2 py-1.5 text-[11.5px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
           />
           <button
             type="button"
@@ -692,9 +692,9 @@ function LearningOutputPane({
   return (
     <div
       data-pane="learning-output"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#090d16]"
     >
-      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0d0d0f] pr-3">
+      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0b1120] pr-3">
         <TabBar
           ariaLabel="Learning output"
           tabs={OUTPUT_TABS.map((item) => ({

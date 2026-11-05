@@ -75,9 +75,9 @@ function NexoraMark({ className }: { className?: string }) {
     <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
       <defs>
         <linearGradient id="nx-mark" x1="4" y1="26" x2="28" y2="6">
-          <stop stopColor="#7ee7c7" />
-          <stop offset="0.55" stopColor="#a8ecdd" />
-          <stop offset="1" stopColor="#e8c37a" />
+          <stop stopColor="#22d3ee" />
+          <stop offset="0.55" stopColor="#67e8f9" />
+          <stop offset="1" stopColor="#8b5cf6" />
         </linearGradient>
       </defs>
       <path
@@ -100,9 +100,10 @@ function NexoraMark({ className }: { className?: string }) {
 }
 
 const ACCENTS = {
-  mint: "#7ee7c7",
-  amber: "#e8c37a",
-  ice: "#9fd8e8",
+  mint: "#22d3ee",
+  amber: "#fbbf24",
+  ice: "#8b5cf6",
+  slate: "#64748b",
 };
 
 const DOCK_APPS: {
@@ -148,9 +149,9 @@ function WindowTitleBar({
     >
       <div className="flex min-w-0 items-center gap-2.5">
         <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="size-2 rounded-full border border-[#ff8a7a]/40 bg-[#ff8a7a]/25" />
-          <span className="size-2 rounded-full border border-[#e8c37a]/40 bg-[#e8c37a]/25" />
-          <span className="size-2 rounded-full border border-[#7ee7c7]/40 bg-[#7ee7c7]/25" />
+          <span className="size-2 rounded-full border border-[#f87171]/40 bg-[#f87171]/25" />
+          <span className="size-2 rounded-full border border-[#fbbf24]/40 bg-[#fbbf24]/25" />
+          <span className="size-2 rounded-full border border-[#22d3ee]/40 bg-[#22d3ee]/25" />
         </div>
         <div className="mx-1 h-4 w-px bg-[var(--a-line)]" />
         {isNexora ? (
@@ -195,7 +196,7 @@ function WindowTitleBar({
           aria-label={`Close ${title}`}
           data-window-control="close"
           onClick={onClose}
-          className="aurora-focus flex size-7 items-center justify-center rounded-sm text-[var(--a-muted)] transition-colors hover:bg-[#ff8a7a]/15 hover:text-[#ffb3a8]"
+          className="aurora-focus flex size-7 items-center justify-center rounded-sm text-[var(--a-muted)] transition-colors hover:bg-[#f87171]/15 hover:text-[#fca5a5]"
         >
           <X className="size-3.5" />
         </button>
@@ -226,7 +227,7 @@ function ArchiveApp() {
           return (
             <div key={group} className="mb-3">
               <div className="flex items-center gap-1.5 px-2 py-1">
-                <FolderClosed className="size-3 text-[var(--a-amber)]/70" />
+                <FolderClosed className="size-3 text-[var(--a-ice)]/70" />
                 <span className="font-mono text-[10px] text-[var(--a-muted)]">{group}/</span>
               </div>
               {files.map((file) => (
@@ -442,7 +443,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
       </div>
 
       {/* ── top bar ─────────────────────────────────────────────── */}
-      <header className="absolute inset-x-0 top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--a-line)] bg-[#040d0f]/55 px-3 backdrop-blur-xl sm:px-4">
+      <header className="absolute inset-x-0 top-0 z-30 flex h-11 items-center justify-between gap-3 border-b border-[var(--a-line)] bg-[#090d16]/75 px-3 backdrop-blur-xl sm:px-4">
         <div className="flex min-w-0 items-center gap-2.5">
           <NexoraMark className="size-5 shrink-0" />
           <div className="flex min-w-0 items-baseline gap-2">
@@ -454,7 +455,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
             </span>
           </div>
           <span className="hidden h-3 w-px bg-[var(--a-line)] sm:block" />
-          <span className="hidden font-mono text-[8px] tracking-[0.18em] text-[var(--a-mint)]/70 sm:inline">
+          <span className="hidden font-mono text-[8px] tracking-[0.18em] text-[var(--a-ice)]/80 sm:inline">
             NEXORA OMEGA
           </span>
         </div>
@@ -512,7 +513,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
       </header>
 
       {/* ── left sidebar ────────────────────────────────────────── */}
-      <aside className="absolute top-11 bottom-[84px] left-0 z-20 hidden w-[68px] flex-col items-center justify-between border-r border-[var(--a-line)] bg-[#050e10]/45 py-4 backdrop-blur-sm lg:flex">
+      <aside className="absolute top-11 bottom-[84px] left-0 z-20 hidden w-[68px] flex-col items-center justify-between border-r border-[var(--a-line)] bg-[#0b1120]/55 py-4 backdrop-blur-sm lg:flex">
         <div className="flex flex-col items-center gap-1.5">
           <span className="aurora-label text-[7px]">Apps</span>
           {DOCK_APPS.map((app) => (
@@ -543,14 +544,14 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
       </aside>
 
       {/* ── right sidebar ───────────────────────────────────────── */}
-      <aside className="absolute top-11 right-0 bottom-[84px] z-20 hidden w-[68px] flex-col items-center justify-between border-l border-[var(--a-line)] bg-[#050e10]/45 py-4 backdrop-blur-sm lg:flex">
+      <aside className="absolute top-11 right-0 bottom-[84px] z-20 hidden w-[68px] flex-col items-center justify-between border-l border-[var(--a-line)] bg-[#0b1120]/55 py-4 backdrop-blur-sm lg:flex">
         <div className="flex flex-col items-center gap-3">
           <span className="aurora-label text-[7px]">Sys</span>
           <div className="flex flex-col items-center gap-2">
             {[
               { label: "CPU", value: 28, color: ACCENTS.mint },
               { label: "MEM", value: 46, color: ACCENTS.ice },
-              { label: "NET", value: 18, color: ACCENTS.amber },
+              { label: "NET", value: 18, color: ACCENTS.slate },
             ].map((meter) => (
               <div key={meter.label} className="flex flex-col items-center gap-1">
                 <div className="relative h-12 w-[3px] overflow-hidden rounded-full bg-white/[0.07]">
@@ -583,7 +584,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
           <div className="relative flex size-[min(72vw,640px)] items-center justify-center opacity-80">
             <div className="aurora-nucleus-ring inset-0 border-[var(--a-mint)]/10" />
             <div className="aurora-nucleus-ring inset-[9%]" style={{ borderStyle: "dashed" }} />
-            <div className="aurora-nucleus-ring inset-[22%] border-[var(--a-amber)]/15" />
+            <div className="aurora-nucleus-ring inset-[22%] border-[var(--a-ice)]/20" />
             <div
               className="absolute inset-[30%] rounded-full border border-[var(--a-mint)]/20"
               style={{ animation: "aurora-pulse 6s ease-in-out infinite" }}
@@ -598,12 +599,12 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
                   cy="200"
                   r="190"
                   fill="none"
-                  stroke="rgba(126,220,201,0.12)"
+                  stroke="rgba(34,211,238,0.14)"
                   strokeDasharray="1 13"
                 />
-                <circle cx="200" cy="18" r="2.5" fill="#e8c37a" opacity="0.8" />
-                <circle cx="382" cy="200" r="2" fill="#7ee7c7" opacity="0.7" />
-                <circle cx="58" cy="290" r="1.8" fill="#9fd8e8" opacity="0.7" />
+                <circle cx="200" cy="18" r="2.5" fill="#8b5cf6" opacity="0.85" />
+                <circle cx="382" cy="200" r="2" fill="#22d3ee" opacity="0.8" />
+                <circle cx="58" cy="290" r="1.8" fill="#e5e7eb" opacity="0.5" />
               </svg>
             </div>
             <div
@@ -614,19 +615,20 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
                 <polygon
                   points="200,36 342,118 342,282 200,364 58,282 58,118"
                   fill="none"
-                  stroke="rgba(126,220,201,0.16)"
+                  stroke="rgba(34,211,238,0.2)"
                   strokeWidth="0.8"
                 />
                 <polygon
                   points="200,92 296,147 296,253 200,308 104,253 104,147"
-                  fill="rgba(126,220,201,0.015)"
-                  stroke="rgba(232,195,122,0.16)"
+                  fill="rgba(139,92,246,0.04)"
+                  stroke="rgba(139,92,246,0.24)"
                   strokeWidth="0.6"
                 />
               </svg>
             </div>
-            <div className="absolute size-16 rounded-full bg-[radial-gradient(circle,rgba(126,231,199,0.55),rgba(126,231,199,0.08)_55%,transparent_72%)] blur-[1px]" />
-            <div className="absolute size-2 rounded-full bg-[#d9fff4] shadow-[0_0_24px_rgba(126,231,199,0.9)]" />
+            <div className="absolute size-28 rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.22),transparent_62%)] blur-[2px]" />
+            <div className="absolute size-16 rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.5),rgba(34,211,238,0.08)_55%,transparent_72%)] blur-[1px]" />
+            <div className="absolute size-2 rounded-full bg-[#e0fbff] shadow-[0_0_24px_rgba(34,211,238,0.9)]" />
             <div className="aurora-scan top-1/2" />
           </div>
         </div>
@@ -635,7 +637,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
           <p className="font-mono text-[9px] tracking-[0.5em] text-[var(--a-mint)]/55 uppercase">
             geometric nucleus · online
           </p>
-          <h1 className="aurora-display mt-4 text-[clamp(3rem,9vw,7rem)] leading-none text-[#e7f7f2]/90">
+          <h1 className="aurora-display mt-4 bg-[linear-gradient(100deg,#e5e7eb_8%,#a5f3fc_46%,#22d3ee_62%,#8b5cf6_96%)] bg-clip-text text-[clamp(3rem,9vw,7rem)] leading-none text-transparent opacity-90">
             AURORA
           </h1>
           <p className="mt-4 max-w-md px-6 text-[12px] leading-relaxed text-[var(--a-text)]/45">
@@ -703,7 +705,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
         })}
 
         {notice ? (
-          <div className="pointer-events-none absolute bottom-4 left-1/2 z-[90] -translate-x-1/2 rounded-sm border border-[var(--a-line)] bg-[#071517]/95 px-3 py-2 font-mono text-[9px] tracking-[0.08em] text-[var(--a-text)]/80 backdrop-blur">
+          <div className="pointer-events-none absolute bottom-4 left-1/2 z-[90] -translate-x-1/2 rounded-sm border border-[var(--a-line)] bg-[#111827]/95 px-3 py-2 font-mono text-[9px] tracking-[0.08em] text-[var(--a-text)]/80 backdrop-blur">
             {notice}
           </div>
         ) : null}
@@ -752,7 +754,7 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
             className="aurora-focus group flex shrink-0 items-center gap-2.5 rounded-sm border border-[var(--a-mint)]/25 bg-[var(--a-mint)]/[0.07] px-2.5 py-2 transition-colors hover:border-[var(--a-mint)]/45 hover:bg-[var(--a-mint)]/[0.11]"
             aria-label="Open NEXORA WORKSPACE"
           >
-            <span className="relative flex size-8 items-center justify-center rounded-sm border border-[var(--a-mint)]/25 bg-[#041012]">
+            <span className="relative flex size-8 items-center justify-center rounded-sm border border-[var(--a-mint)]/25 bg-[#090d16]">
               <NexoraMark className="size-5" />
               {windows.some((win) => win.id === "nexora" && !win.minimized) ? (
                 <span className="absolute -bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-[var(--a-mint)]" />
