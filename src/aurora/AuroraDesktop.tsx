@@ -12,6 +12,7 @@ import {
   Clock3,
   Command,
   Cpu,
+  Download,
   FolderClosed,
   Gauge,
   Maximize2,
@@ -633,6 +634,14 @@ export function AuroraDesktop({ initialWindowOpen = true }: { initialWindowOpen?
               Open Nexora Workspace
               <ArrowUpRight className="size-3.5" />
             </Button>
+            <a
+              href="/nexora-omega.zip"
+              download="nexora-omega.zip"
+              className="aurora-outline-btn aurora-focus flex h-8 items-center gap-2 rounded-sm px-3 font-mono text-[9px] tracking-[0.16em] uppercase"
+            >
+              <Download className="size-3.5" />
+              Source .zip
+            </a>
             <span className="hidden items-center gap-1.5 font-mono text-[8px] tracking-[0.14em] text-[var(--a-muted)] uppercase sm:flex">
               <Cpu className="size-3" /> single window
             </span>
