@@ -7,10 +7,14 @@ import type { NexoraTask } from "@/nexora/types";
 import { ENG_TABS, EngineeringLayout } from "@/workspace/EngineeringPanes";
 import { LEARNING_TABS, LearningLayout } from "@/workspace/LearningPanes";
 import {
+  ChevronDown,
   Code2,
+  GitBranch,
   GraduationCap,
   LockKeyhole,
   ShieldCheck,
+  Sparkles,
+  Users,
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 
@@ -34,6 +38,20 @@ function taskStateLabel(task: NexoraTask | null) {
   return states[task.status];
 }
 
+function WorkspaceMark({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--a-mint)] text-[12px] font-bold text-[#06271a]",
+        className,
+      )}
+      aria-hidden="true"
+    >
+      N
+    </span>
+  );
+}
+
 export function WorkspaceStatusBar({
   controller,
 }: {
@@ -44,7 +62,7 @@ export function WorkspaceStatusBar({
     <footer
       data-window-statusbar
       role="status"
-      className="flex h-6 shrink-0 items-center justify-between gap-3 overflow-hidden border-t border-[var(--a-line)] bg-[#050f11] px-2.5 font-mono text-[9px] tracking-[0.06em] text-[var(--a-muted)]"
+      className="flex h-6 shrink-0 items-center justify-between gap-3 overflow-hidden border-t border-[var(--a-line)] bg-[#0f0f11] px-2.5 font-mono text-[9.5px] text-[var(--a-muted)]"
       style={{ height: 24 }}
     >
       <div className="flex min-w-0 items-center gap-2">
@@ -52,25 +70,23 @@ export function WorkspaceStatusBar({
           className={cn(
             "size-1.5 shrink-0 rounded-full",
             task?.status === "applied"
-              ? "bg-[#8be6b0]"
+              ? "bg-[#8fe3aa]"
               : task?.status === "approved"
-                ? "bg-[#9fd8e8]"
+                ? "bg-[#a9bde8]"
                 : task?.status === "rejected"
-                  ? "bg-[#ff8a7a]"
-                  : "bg-[#e8c37a]",
+                  ? "bg-[#ff9a8b]"
+                  : "bg-[#f0cf8e]",
           )}
         />
-        <span className="truncate uppercase">{taskStateLabel(task)}</span>
+        <span className="truncate">{taskStateLabel(task)}</span>
       </div>
       <div className="flex min-w-0 shrink items-center gap-2">
-        <span className="hidden shrink-0 text-[var(--a-text)]/60 sm:inline">
-          TASK
-        </span>
+        <span className="hidden shrink-0 text-[var(--a-muted)]/70 sm:inline">TASK</span>
         <span className="shrink-0 text-[var(--a-mint)]/85">
           {controller.data.taskCode}
         </span>
         <span className="h-2.5 w-px shrink-0 bg-[var(--a-line)]" />
-        <span className="truncate text-[var(--a-text)]/55">
+        <span className="truncate text-[var(--a-muted)]/80">
           {controller.data.workspacePath}
         </span>
       </div>
@@ -80,7 +96,7 @@ export function WorkspaceStatusBar({
         ) : (
           <LockKeyhole className="size-2.5 text-[var(--a-amber)]/80" />
         )}
-        <span className="uppercase">
+        <span>
           {controller.mode === "founder"
             ? controller.syncing
               ? "SYNCING"
@@ -117,25 +133,77 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
   const setActiveTab = layout === "learning" ? setLearningPane : setEngineeringPane;
 
   const paneProps = { controller, compact };
+  const task = controller.activeTask;
+  const live = controller.mode === "founder";
 
   return (
     <div
       className={cn(
-        "flex h-full min-h-0 flex-col bg-[#050d0f]",
+        "flex h-full min-h-0 flex-col bg-[#0a0a0c]",
         !isWindowActive && "opacity-[0.98]",
       )}
     >
+      {/* Freebuff-style project header */}
+      <header
+        data-workspace-header
+        className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0f0f11] px-2.5"
+      >
+        <div className="flex min-w-0 items-center gap-2">
+          <WorkspaceMark />
+          <div className="flex min-w-0 items-baseline gap-1.5">
+            <span className="shrink-0 text-[12.5px] font-semibold tracking-[-0.01em] text-[var(--a-text)]">
+              Nexora
+            </span>
+            <span className="hidden shrink-0 text-[12px] text-[var(--a-muted)] sm:inline">
+              Workspace
+            </span>
+          </div>
+          <span className="mx-1 h-4 w-px shrink-0 bg-[var(--a-line)]" />
+          <span className="hidden shrink-0 items-center gap-1.5 rounded-md border border-[var(--a-line)] bg-white/[0.025] px-2 py-1 text-[11px] text-[var(--a-text)]/85 md:inline-flex">
+            <GitBranch className="size-3 text-[var(--a-muted)]" />
+            main
+            <ChevronDown className="size-3 text-[var(--a-muted)]" />
+          </span>
+          <span className="hidden min-w-0 truncate text-[11.5px] text-[var(--a-muted)] lg:inline">
+            {task ? `${task.code} · ${task.title}` : controller.data.workspacePath}
+          </span>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-1.5">
+          <span className="hidden items-center gap-1.5 rounded-md border border-[var(--a-line)] px-2 py-1 text-[11px] text-[var(--a-muted)] sm:flex">
+            <Users className="size-3" />
+            Members
+            <span className="text-[var(--a-text)]/80">1</span>
+          </span>
+          <span className="hidden items-center gap-1.5 rounded-md border border-[var(--a-line)] px-2 py-1 text-[10.5px] text-[var(--a-muted)] md:flex">
+            <span
+              className={cn(
+                "size-1.5 rounded-full",
+                live ? "bg-[#8fe3aa]" : "bg-[#f0cf8e]",
+              )}
+            />
+            {controller.syncing ? "Syncing" : live ? "Live" : "Local"}
+          </span>
+          <button
+            type="button"
+            onClick={openEngineering}
+            className="aurora-cta aurora-focus flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[11.5px] font-semibold"
+          >
+            <Sparkles className="size-3" />
+            <span className="hidden sm:inline">Review patch</span>
+            <span className="sm:hidden">Review</span>
+          </button>
+        </div>
+      </header>
+
       <div className="flex min-h-0 flex-1">
         {/* exactly two rail items */}
         <nav
           aria-label="Nexora workspace sections"
-          className="flex w-[60px] shrink-0 flex-col items-center justify-between border-r border-[var(--a-line)] bg-[#061113] py-2"
+          className="flex shrink-0 flex-col items-center justify-between border-r border-[var(--a-line)] bg-[#0b0b0d] py-2"
           style={{ width: PANE_LIMITS.rail }}
         >
-          <div className="flex w-full flex-col items-center gap-1 px-1">
-            <span className="aurora-label mb-1 text-[6.5px] text-[var(--a-muted)]/70">
-              Mode
-            </span>
+          <div className="flex w-full flex-col items-center gap-1 px-1.5">
             {RAIL.map((item) => {
               const active = layout === item.id;
               return (
@@ -146,14 +214,14 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
                   aria-current={active ? "page" : undefined}
                   onClick={() => switchLayout(item.id)}
                   className={cn(
-                    "aurora-focus aurora-railtab flex w-full flex-col items-center gap-1 rounded-sm px-1 py-2.5",
+                    "aurora-focus aurora-railtab flex w-full flex-col items-center gap-1.5 rounded-md px-1 py-2.5",
                     active && "aurora-railtab-active",
                   )}
                   title={`${item.label} layout`}
                 >
-                  <item.icon className="size-4" strokeWidth={1.7} />
-                  <span className="font-mono text-[6.5px] tracking-[0.12em] uppercase">
-                    {item.id === "engineering" ? "ENG" : "LEARN"}
+                  <item.icon className="size-[17px]" strokeWidth={1.8} />
+                  <span className="text-[8.5px] font-medium tracking-[0.06em] uppercase">
+                    {item.id === "engineering" ? "Eng" : "Learn"}
                   </span>
                 </button>
               );
@@ -165,25 +233,23 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
             <div
               className="flex flex-col items-center gap-1"
               title={
-                controller.mode === "founder"
+                live
                   ? "Server-authorized founder session"
                   : "Guest preview: actions are local only"
               }
             >
-              {controller.mode === "founder" ? (
-                <ShieldCheck className="size-3 text-[var(--a-mint)]/70" />
+              {live ? (
+                <ShieldCheck className="size-3.5 text-[var(--a-mint)]/80" />
               ) : (
-                <LockKeyhole className="size-3 text-[var(--a-amber)]/70" />
+                <LockKeyhole className="size-3.5 text-[var(--a-amber)]/80" />
               )}
               <span
                 className={cn(
-                  "font-mono text-[5.5px] tracking-[0.1em] uppercase",
-                  controller.mode === "founder"
-                    ? "text-[var(--a-mint)]/60"
-                    : "text-[var(--a-amber)]/60",
+                  "text-[8px] font-medium tracking-[0.08em] uppercase",
+                  live ? "text-[var(--a-mint)]/70" : "text-[var(--a-amber)]/70",
                 )}
               >
-                {controller.mode === "founder" ? "Live" : "Local"}
+                {live ? "Live" : "Local"}
               </span>
             </div>
           </div>
@@ -198,7 +264,7 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
             <div
               role="tablist"
               aria-label="Workspace panes"
-              className="flex shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] bg-[#071416] px-1.5 py-1.5"
+              className="flex shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] bg-[#0d0d0f] px-2 py-1.5"
             >
               {tabs.map((tab) => (
                 <button
@@ -209,10 +275,10 @@ export function NexoraWorkspace({ isWindowActive = true }: { isWindowActive?: bo
                   data-pane-tab={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={cn(
-                    "aurora-focus shrink-0 rounded-sm border px-2.5 py-1 font-mono text-[9px] tracking-[0.1em] uppercase",
+                    "aurora-focus shrink-0 rounded-md border border-transparent px-2.5 py-1 text-[11.5px] font-medium",
                     activeTab === tab.id
-                      ? "aurora-tab-active"
-                      : "border-transparent text-[var(--a-muted)]",
+                      ? "bg-white/[0.06] text-[var(--a-text)]"
+                      : "text-[var(--a-muted)]",
                   )}
                 >
                   {tab.label}

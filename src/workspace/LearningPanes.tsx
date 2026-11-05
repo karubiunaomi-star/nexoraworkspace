@@ -27,7 +27,6 @@ import {
   Loader2,
   LockKeyhole,
   MessagesSquare,
-  PanelRight,
   Paperclip,
   Plus,
   Send,
@@ -55,11 +54,11 @@ function AttachmentRow({ item }: { item: Attachment }) {
   const Icon = item.kind === "link" ? Link2 : FileText;
   const content = (
     <>
-      <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-sm border border-[var(--a-line)] bg-white/[0.02]">
-        <Icon className="size-3 text-[var(--a-mint)]/70" />
+      <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md border border-[var(--a-line)] bg-white/[0.035]">
+        <Icon className="size-3 text-[var(--a-muted)]" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate font-mono text-[10px] text-[var(--a-text)]/85">
+        <span className="block truncate font-mono text-[10.5px] text-[var(--a-text)]/85">
           {item.name}
         </span>
         <span className="mt-0.5 block truncate text-[10px] text-[var(--a-muted)]">
@@ -76,7 +75,7 @@ function AttachmentRow({ item }: { item: Attachment }) {
         href={item.href}
         target="_blank"
         rel="noreferrer noopener"
-        className="aurora-focus flex items-start gap-2 rounded-sm border border-[var(--a-line)] bg-white/[0.015] px-2 py-1.5 transition-colors hover:border-[var(--a-mint)]/25 hover:bg-white/[0.03]"
+        className="aurora-focus flex items-start gap-2 rounded-lg border border-[var(--a-line)] bg-white/[0.02] px-2.5 py-2 transition-colors hover:border-[var(--a-line-strong)] hover:bg-white/[0.04]"
       >
         {content}
         <ExternalLink className="mt-1 size-2.5 shrink-0 text-[var(--a-muted)]" />
@@ -84,7 +83,7 @@ function AttachmentRow({ item }: { item: Attachment }) {
     );
   }
   return (
-    <div className="flex items-start gap-2 rounded-sm border border-[var(--a-line)] bg-white/[0.015] px-2 py-1.5">
+    <div className="flex items-start gap-2 rounded-lg border border-[var(--a-line)] bg-white/[0.02] px-2.5 py-2">
       {content}
     </div>
   );
@@ -93,27 +92,34 @@ function AttachmentRow({ item }: { item: Attachment }) {
 function MessageBubble({ message }: { message: ChatMessage }) {
   const assistant = message.role === "assistant";
   return (
-    <div className={cn("flex flex-col gap-1.5", assistant ? "items-start" : "items-end")}>
-      <div className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.16em] uppercase">
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-1.5 text-[11px]">
         {assistant ? (
           <>
-            <Sparkles className="size-2.5 text-[var(--a-mint)]/80" />
-            <span className="text-[var(--a-mint)]/80">Nexora · plan engine</span>
+            <span className="flex size-4 shrink-0 items-center justify-center rounded bg-white/[0.06]">
+              <Sparkles className="size-2.5 text-[var(--a-mint)]" />
+            </span>
+            <span className="font-medium text-[var(--a-text)]/90">Nexora</span>
+            <span className="text-[var(--a-muted)]/70">plan engine</span>
           </>
         ) : (
           <>
-            <span className="text-[var(--a-amber)]/80">Founder</span>
-            <span className="text-[var(--a-muted)]/60">you</span>
+            <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-amber)]/15 text-[8px] font-semibold text-[var(--a-amber)]">
+              Y
+            </span>
+            <span className="font-medium text-[var(--a-text)]/90">You</span>
           </>
         )}
-        <span className="text-[var(--a-muted)]/50">{formatTime(message.at)}</span>
+        <span className="ml-auto shrink-0 font-mono text-[9px] text-[var(--a-muted)]/60">
+          {formatTime(message.at)}
+        </span>
       </div>
       <div
         className={cn(
-          "w-full rounded-sm border px-3 py-2.5 text-[12px] leading-[1.65]",
+          "w-full",
           assistant
-            ? "border-[var(--a-line)] bg-[linear-gradient(160deg,rgba(126,220,201,0.045),rgba(126,220,201,0.01))] text-[var(--a-text)]/90"
-            : "border-[var(--a-amber)]/20 bg-[var(--a-amber)]/[0.045] text-[var(--a-text)]/90",
+            ? "text-[12.5px] leading-[1.7] text-[var(--a-text)]/85"
+            : "rounded-lg border border-[var(--a-line)] bg-white/[0.025] px-3 py-2.5 text-[12.5px] leading-[1.7] text-[var(--a-text)]/90",
         )}
       >
         <p className="whitespace-pre-wrap">{message.content}</p>
@@ -183,7 +189,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
   return (
     <div
       data-pane="conversation"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#071315]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
       <PaneHeader
         icon={MessagesSquare}
@@ -202,7 +208,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
         }
       />
 
-      <div ref={scrollRef} className="aurora-scroll flex-1 space-y-4 p-3">
+      <div ref={scrollRef} className="aurora-scroll flex-1 space-y-5 px-3 py-3">
         {controller.syncing ? (
           <div className="flex items-center gap-2 rounded-sm border border-[var(--a-line)] px-3 py-2 font-mono text-[9px] text-[var(--a-muted)]">
             <Loader2 className="size-3 animate-spin" /> syncing founder workspace…
@@ -229,10 +235,10 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
           </div>
         ) : null}
 
-        <div className="h-2" />
+        <div className="h-1" />
       </div>
 
-      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#061012] p-2">
+      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#0b0b0d] p-2">
         {attachments.length > 0 ? (
           <div className="mb-1.5 flex flex-wrap gap-1">
             {attachments.map((item) => (
@@ -264,7 +270,7 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
             event.preventDefault();
             void submit();
           }}
-          className="rounded-sm border border-[var(--a-line)] bg-[#081618] focus-within:border-[var(--a-mint)]/30"
+          className="rounded-xl border border-[var(--a-line-strong)] bg-[#141416] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
         >
           <textarea
             value={draft}
@@ -276,11 +282,11 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
               }
             }}
             rows={2}
-            placeholder="Ask Learning to inspect, summarise or propose…"
+            placeholder="Message…"
             aria-label="Prompt"
-            className="block w-full resize-none bg-transparent px-2.5 pt-2 font-sans text-[12px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/70"
+            className="block w-full resize-none bg-transparent py-0.5 text-[12.5px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/80"
           />
-          <div className="flex items-center justify-between gap-2 px-1.5 pb-1.5">
+          <div className="mt-1 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1">
               <input
                 ref={fileInput}
@@ -295,33 +301,35 @@ function ConversationPane({ controller }: { controller: NexoraController }) {
               <button
                 type="button"
                 onClick={() => fileInput.current?.click()}
-                className="aurora-focus flex items-center gap-1 rounded-sm px-1.5 py-1 font-mono text-[9px] text-[var(--a-muted)] transition-colors hover:bg-white/[0.05] hover:text-[var(--a-text)]"
+                className="aurora-focus flex items-center gap-1.5 rounded-md px-1.5 py-1 text-[10px] text-[var(--a-muted)] transition-colors hover:bg-white/[0.05] hover:text-[var(--a-text)]"
                 aria-label="Attach files"
               >
-                <Paperclip className="size-3" />
-                Attach
+                <Paperclip className="size-3.5" />
+                <span className="hidden sm:inline">Attach</span>
               </button>
-              <span className="hidden font-mono text-[8px] text-[var(--a-muted)]/60 sm:inline">
-                shift+enter
-              </span>
             </div>
-            <button
-              type="submit"
-              disabled={!draft.trim() || sending}
-              data-action="send-prompt"
-              className="aurora-cta aurora-focus flex items-center gap-1.5 rounded-sm px-2.5 py-1 font-mono text-[9px] tracking-[0.12em] uppercase disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {sending ? (
-                <Loader2 className="size-3 animate-spin" />
-              ) : (
-                <Send className="size-3" />
-              )}
-              Send
-            </button>
+            <div className="flex items-center gap-2">
+              <span className="hidden max-w-[140px] truncate text-[10px] text-[var(--a-muted)]/70 sm:inline">
+                {controller.data.sources.length} files indexed
+              </span>
+              <button
+                type="submit"
+                disabled={!draft.trim() || sending}
+                data-action="send-prompt"
+                className="aurora-cta aurora-focus flex size-7 items-center justify-center rounded-lg disabled:cursor-not-allowed disabled:opacity-40"
+                aria-label="Send prompt"
+              >
+                {sending ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : (
+                  <Send className="size-3.5" />
+                )}
+              </button>
+            </div>
           </div>
         </form>
 
-        <div className="mt-1.5 flex items-center justify-between gap-2 px-0.5 font-mono text-[8px] text-[var(--a-muted)]/70">
+        <div className="mt-1 flex items-center justify-between gap-2 px-1 text-[9.5px] text-[var(--a-muted)]/60">
           <span className="truncate">
             {controller.mode === "founder"
               ? "founder session · prompts audited"
@@ -520,7 +528,7 @@ function KnowledgeTab({ controller }: { controller: NexoraController }) {
             onChange={(event) => setTitle(event.target.value)}
             placeholder="Note title"
             aria-label="Knowledge note title"
-            className="w-full rounded-sm border border-[var(--a-line)] bg-[#061113] px-2 py-1.5 text-[11px] text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-[var(--a-mint)]/35"
+            className="w-full rounded-md border border-[var(--a-line)] bg-[#0f0f11] px-2 py-1.5 text-[11.5px] text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
           />
           <textarea
             value={body}
@@ -528,7 +536,7 @@ function KnowledgeTab({ controller }: { controller: NexoraController }) {
             rows={3}
             placeholder="What should persist for the next session?"
             aria-label="Knowledge note body"
-            className="w-full resize-none rounded-sm border border-[var(--a-line)] bg-[#061113] px-2 py-1.5 text-[11px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-[var(--a-mint)]/35"
+            className="w-full resize-none rounded-md border border-[var(--a-line)] bg-[#0f0f11] px-2 py-1.5 text-[11.5px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/60 focus:border-white/25"
           />
           <button
             type="button"
@@ -684,27 +692,23 @@ function LearningOutputPane({
   return (
     <div
       data-pane="learning-output"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#061113]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
-      <PaneHeader
-        icon={PanelRight}
-        label="Output"
-        hint="report · sources · knowledge"
-        right={
-          <span className="flex items-center gap-1 font-mono text-[8px] tracking-[0.12em] text-[var(--a-muted)] uppercase">
-            <GraduationCap className="size-2.5" /> learning
-          </span>
-        }
-      />
-      <TabBar
-        ariaLabel="Learning output"
-        tabs={OUTPUT_TABS.map((item) => ({
-          ...item,
-          count: counts[item.id],
-        }))}
-        value={tab}
-        onChange={setTab}
-      />
+      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0d0d0f] pr-3">
+        <TabBar
+          ariaLabel="Learning output"
+          tabs={OUTPUT_TABS.map((item) => ({
+            ...item,
+            count: counts[item.id],
+          }))}
+          value={tab}
+          onChange={setTab}
+          className="border-b-0"
+        />
+        <span className="flex shrink-0 items-center gap-1 font-mono text-[8.5px] tracking-[0.08em] text-[var(--a-muted)]/70 uppercase">
+          <GraduationCap className="size-2.5" /> learning
+        </span>
+      </div>
       <div className="aurora-scroll flex-1 p-3">
         {tab === "report" ? <ReportTab controller={controller} /> : null}
         {tab === "sources" ? <SourcesTab controller={controller} /> : null}

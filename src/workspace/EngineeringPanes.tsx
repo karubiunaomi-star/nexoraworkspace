@@ -29,7 +29,6 @@ import {
   GitCompare,
   Loader2,
   LockKeyhole,
-  PanelRight,
   Play,
   ScanLine,
   Send,
@@ -82,7 +81,7 @@ function FilesPane({
   return (
     <div
       data-pane="files"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#061012]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
       <PaneHeader
         icon={FolderTree}
@@ -98,8 +97,8 @@ function FilesPane({
         {groups.map((group) => (
           <div key={group} className="mb-2">
             <div className="flex items-center gap-1 px-1.5 py-1">
-              <ChevronRight className="size-2.5 text-[var(--a-muted)]/60" />
-              <span className="truncate font-mono text-[9px] text-[var(--a-muted)]">
+              <ChevronRight className="size-3 text-[var(--a-muted)]/60" />
+              <span className="truncate font-mono text-[10px] text-[var(--a-muted)]">
                 {group}/
               </span>
             </div>
@@ -115,20 +114,25 @@ function FilesPane({
                     data-file-path={file.path}
                     onClick={() => onSelectFile(file.path)}
                     className={cn(
-                      "aurora-focus flex w-full items-center gap-1.5 rounded-sm px-1.5 py-1.5 text-left transition-colors",
+                      "aurora-focus flex w-full items-center gap-1.5 rounded-md px-1.5 py-1.5 text-left transition-colors",
                       active
-                        ? "bg-[var(--a-mint)]/[0.08] text-[var(--a-mint)]"
-                        : "text-[var(--a-text)]/70 hover:bg-white/[0.035] hover:text-[var(--a-text)]",
+                        ? "bg-white/[0.06] text-[var(--a-text)]"
+                        : "text-[var(--a-text)]/65 hover:bg-white/[0.035] hover:text-[var(--a-text)]",
                     )}
                   >
-                    <FileCode2 className="size-3 shrink-0 opacity-70" />
-                    <span className="min-w-0 flex-1 truncate font-mono text-[10px]">
+                    <FileCode2
+                      className={cn(
+                        "size-3 shrink-0",
+                        active ? "text-[var(--a-mint)]" : "opacity-60",
+                      )}
+                    />
+                    <span className="min-w-0 flex-1 truncate font-mono text-[10.5px]">
                       {file.path.split("/").pop()}
                     </span>
                     {pending ? (
                       <span
                         title="Patch proposed — approval required"
-                        className="size-1.5 shrink-0 rounded-full bg-[var(--a-amber)]"
+                        className="size-1.5 shrink-0 rounded-full bg-[var(--a-mint)]"
                       />
                     ) : null}
                   </button>
@@ -138,10 +142,11 @@ function FilesPane({
           </div>
         ))}
       </div>
-      <div className="shrink-0 border-t border-[var(--a-line)] px-2 py-1.5 font-mono text-[7.5px] leading-relaxed tracking-[0.06em] text-[var(--a-muted)]/70">
-        READ-ONLY SNAPSHOTS
-        <br />
-        {controller.data.workspacePath}
+      <div className="shrink-0 border-t border-[var(--a-line)] px-2.5 py-2 font-mono text-[9.5px] leading-relaxed text-[var(--a-muted)]/75">
+        <span className="flex items-center gap-1.5">
+          <LockKeyhole className="size-2.5" /> read-only snapshots
+        </span>
+        <span className="mt-0.5 block truncate">{controller.data.workspacePath}</span>
       </div>
     </div>
   );
@@ -166,7 +171,7 @@ function CodePane({
   return (
     <div
       data-pane="code"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#050d0f]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
       <PaneHeader
         icon={Code2}
@@ -285,7 +290,7 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
   return (
     <div
       data-pane="ai"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#071214]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
       <PaneHeader
         icon={Sparkles}
@@ -300,39 +305,45 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
         }
       />
 
-      <div className="aurora-scroll flex-1 p-2.5">
-        <div className="space-y-2">
-          {messages.map((message) => (
-            <div
-              key={`eng-${message.id}`}
-              className={cn(
-                "rounded-sm border px-2 py-1.5 text-[10.5px] leading-relaxed",
-                message.role === "assistant"
-                  ? "border-[var(--a-line)] bg-[var(--a-mint)]/[0.025] text-[var(--a-text)]/85"
-                  : "border-[var(--a-amber)]/15 bg-[var(--a-amber)]/[0.035] text-[var(--a-text)]/80",
-              )}
-            >
-              <div className="mb-1 flex items-center justify-between gap-2">
-                <span className="flex items-center gap-1 font-mono text-[7.5px] tracking-[0.14em] uppercase">
-                  {message.role === "assistant" ? (
+      <div className="aurora-scroll flex-1 px-3 py-3">
+        <div className="space-y-4">
+          {messages.map((message) => {
+            const assistant = message.role === "assistant";
+            return (
+              <div key={`eng-${message.id}`}>
+                <div className="mb-1.5 flex items-center gap-1.5 text-[11px]">
+                  {assistant ? (
                     <>
-                      <Bot className="size-2.5 text-[var(--a-mint)]/80" />
-                      <span className="text-[var(--a-mint)]/75">plan engine</span>
+                      <span className="flex size-4 shrink-0 items-center justify-center rounded bg-white/[0.06]">
+                        <Bot className="size-2.5 text-[var(--a-mint)]" />
+                      </span>
+                      <span className="font-medium text-[var(--a-text)]/90">Nexora</span>
+                      <span className="text-[var(--a-muted)]/70">plan engine</span>
                     </>
                   ) : (
                     <>
-                      <span className="size-1.5 rounded-full bg-[var(--a-amber)]/60" />
-                      <span className="text-[var(--a-amber)]/75">founder</span>
+                      <span className="flex size-4 shrink-0 items-center justify-center rounded bg-[var(--a-amber)]/15 text-[8px] font-semibold text-[var(--a-amber)]">
+                        Y
+                      </span>
+                      <span className="font-medium text-[var(--a-text)]/90">You</span>
                     </>
                   )}
-                </span>
-                <span className="font-mono text-[7.5px] text-[var(--a-muted)]/60">
-                  {formatTime(message.at)}
-                </span>
+                  <span className="ml-auto shrink-0 font-mono text-[9px] text-[var(--a-muted)]/60">
+                    {formatTime(message.at)}
+                  </span>
+                </div>
+                <p
+                  className={cn(
+                    "line-clamp-5 whitespace-pre-wrap text-[12.5px] leading-[1.7] text-[var(--a-text)]/85",
+                    !assistant &&
+                      "rounded-lg border border-[var(--a-line)] bg-white/[0.025] px-3 py-2",
+                  )}
+                >
+                  {message.content}
+                </p>
               </div>
-              <p className="line-clamp-4 whitespace-pre-wrap">{message.content}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {task ? (
@@ -478,13 +489,13 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
       </div>
 
       {/* prompt box pinned to the bottom of the AI pane */}
-      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#061012] p-2">
+      <div className="shrink-0 border-t border-[var(--a-line)] bg-[#0b0b0d] p-2">
         <form
           onSubmit={(event) => {
             event.preventDefault();
             void submit();
           }}
-          className="flex items-end gap-1.5 rounded-sm border border-[var(--a-line)] bg-[#081618] px-2 py-1.5 focus-within:border-[var(--a-mint)]/30"
+          className="rounded-xl border border-[var(--a-line-strong)] bg-[#141416] px-2.5 pt-2 pb-1.5 focus-within:border-white/25"
         >
           <textarea
             value={draft}
@@ -496,28 +507,35 @@ function EngineeringAiPane({ controller }: { controller: NexoraController }) {
               }
             }}
             rows={1}
-            placeholder="Instruct the plan engine…"
+            placeholder="Message…"
             aria-label="Engineering prompt"
-            className="max-h-20 min-h-[20px] flex-1 resize-none bg-transparent py-0.5 font-sans text-[11px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/70"
+            className="max-h-24 min-h-[22px] w-full resize-none bg-transparent py-0.5 text-[12.5px] leading-relaxed text-[var(--a-text)] outline-none placeholder:text-[var(--a-muted)]/80"
           />
-          <button
-            type="submit"
-            disabled={!draft.trim() || sending}
-            data-action="send-engineering-prompt"
-            className="aurora-cta flex size-6 shrink-0 items-center justify-center rounded-sm disabled:opacity-35"
-            aria-label="Send engineering prompt"
-          >
-            {sending ? (
-              <Loader2 className="size-3 animate-spin" />
-            ) : (
-              <Send className="size-3" />
-            )}
-          </button>
+          <div className="mt-1 flex items-center justify-between gap-2">
+            <span className="flex min-w-0 items-center gap-1.5 truncate text-[10px] text-[var(--a-muted)]/80">
+              <Sparkles className="size-2.5 text-[var(--a-mint)]/70" />
+              Nexora Plan
+              <span className="hidden text-[var(--a-muted)]/50 sm:inline">· deterministic</span>
+            </span>
+            <button
+              type="submit"
+              disabled={!draft.trim() || sending}
+              data-action="send-engineering-prompt"
+              className="aurora-cta aurora-focus flex size-7 shrink-0 items-center justify-center rounded-lg disabled:opacity-35"
+              aria-label="Send engineering prompt"
+            >
+              {sending ? (
+                <Loader2 className="size-3.5 animate-spin" />
+              ) : (
+                <Send className="size-3.5" />
+              )}
+            </button>
+          </div>
         </form>
-        <div className="mt-1 flex items-center justify-between px-0.5 font-mono text-[7.5px] text-[var(--a-muted)]/65">
-          <span>plan engine · deterministic · no external model</span>
+        <div className="mt-1 flex items-center justify-between px-1 text-[9.5px] text-[var(--a-muted)]/60">
+          <span>approval is a separate founder action</span>
           <span className="flex items-center gap-1">
-            <ShieldCheck className="size-2.5" /> approval separate
+            <ShieldCheck className="size-2.5" /> no shell access
           </span>
         </div>
       </div>
@@ -529,11 +547,14 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
   const applied = controller.activeTask?.status === "applied";
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <p className="aurora-label">Preview buffer</p>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex min-w-0 items-center gap-1.5 rounded-md border border-[var(--a-line)] bg-white/[0.025] px-2 py-1 text-[10px] text-[var(--a-muted)]">
+          <LockKeyhole className="size-2.5 shrink-0" />
+          <span className="truncate font-mono">nexora://preview/dock-telemetry</span>
+        </div>
         <span
           className={cn(
-            "rounded-sm border px-1.5 py-0.5 font-mono text-[7.5px] tracking-[0.12em] uppercase",
+            "shrink-0 rounded-md border px-1.5 py-0.5 font-mono text-[8.5px] tracking-[0.06em] uppercase",
             applied
               ? "border-[var(--a-mint)]/30 bg-[var(--a-mint)]/10 text-[var(--a-mint)]"
               : "border-[var(--a-line)] text-[var(--a-muted)]",
@@ -543,7 +564,7 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
         </span>
       </div>
 
-      <div className="overflow-hidden rounded-sm border border-[var(--a-line)] bg-[#050e10]">
+      <div className="overflow-hidden rounded-lg border border-[var(--a-line-strong)] bg-[#0b0b0d]">
         <div className="flex items-center justify-between border-b border-[var(--a-line)] px-2.5 py-1.5">
           <span className="flex items-center gap-1.5 font-mono text-[8px] tracking-[0.16em] text-[var(--a-text)]/75 uppercase">
             <span className="size-1.5 rounded-full bg-[var(--a-mint)]" />
@@ -551,7 +572,7 @@ function PreviewTab({ controller }: { controller: NexoraController }) {
           </span>
           <span className="font-mono text-[7px] text-[var(--a-muted)]">1440 × 900</span>
         </div>
-        <div className="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_100%,rgba(30,100,90,0.3),transparent_65%),#050b0d] p-3">
+        <div className="relative overflow-hidden bg-[radial-gradient(90%_70%_at_50%_100%,rgba(80,180,140,0.16),transparent_65%),#08080a] p-3">
           <div className="flex items-center justify-between font-mono text-[6.5px] tracking-[0.16em] text-[var(--a-muted)] uppercase">
             <span>Nexora / Aurora</span>
             <span className="flex items-center gap-1">
@@ -736,24 +757,20 @@ function EngineeringOutputPane({ controller }: { controller: NexoraController })
   return (
     <div
       data-pane="engineering-output"
-      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#061113]"
+      className="flex h-full min-h-0 min-w-0 flex-col overflow-hidden bg-[#0b0b0d]"
     >
-      <PaneHeader
-        icon={PanelRight}
-        label="Output"
-        hint={controller.data.taskCode}
-        right={
-          <span className="flex items-center gap-1 font-mono text-[8px] tracking-[0.12em] text-[var(--a-muted)] uppercase">
-            <ScanLine className="size-2.5" /> engineering
-          </span>
-        }
-      />
-      <TabBar
-        ariaLabel="Engineering output"
-        tabs={OUTPUT_TABS}
-        value={tab}
-        onChange={setTab}
-      />
+      <div className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-[var(--a-line)] bg-[#0d0d0f] pr-3">
+        <TabBar
+          ariaLabel="Engineering output"
+          tabs={OUTPUT_TABS}
+          value={tab}
+          onChange={setTab}
+          className="border-b-0"
+        />
+        <span className="flex shrink-0 items-center gap-1 font-mono text-[8.5px] tracking-[0.08em] text-[var(--a-muted)]/70 uppercase">
+          <ScanLine className="size-2.5" /> engineering
+        </span>
+      </div>
       <div className="aurora-scroll flex-1 p-3">
         {tab === "preview" ? <PreviewTab controller={controller} /> : null}
         {tab === "build" ? <BuildTab /> : null}

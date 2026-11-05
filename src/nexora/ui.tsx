@@ -31,12 +31,12 @@ export function PaneHeader({
   right?: ReactNode;
 }) {
   return (
-    <div className="aurora-pane-head flex h-10 shrink-0 items-center justify-between gap-3 px-3">
+    <div className="aurora-pane-head flex h-11 shrink-0 items-center justify-between gap-3 px-3">
       <div className="flex min-w-0 items-center gap-2">
-        <Icon className="size-3.5 shrink-0 text-[var(--a-mint)]/80" strokeWidth={1.7} />
-        <span className="aurora-label shrink-0 text-[var(--a-text)]/80">{label}</span>
+        <Icon className="size-3.5 shrink-0 text-[var(--a-muted)]" strokeWidth={1.8} />
+        <span className="shrink-0 text-[12px] font-medium text-[var(--a-text)]">{label}</span>
         {hint ? (
-          <span className="truncate font-mono text-[10px] text-[var(--a-muted)]">
+          <span className="truncate font-mono text-[10.5px] text-[var(--a-muted)]/80">
             {hint}
           </span>
         ) : null}
@@ -64,7 +64,7 @@ export function TabBar<T extends string>({
       role="tablist"
       aria-label={ariaLabel}
       className={cn(
-        "flex shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] px-2 py-1.5",
+        "flex h-11 shrink-0 items-center gap-1 overflow-x-auto border-b border-[var(--a-line)] bg-[#0d0d0f] px-2",
         className,
       )}
     >
@@ -78,15 +78,15 @@ export function TabBar<T extends string>({
             data-pane-tab={tab.id}
             onClick={() => onChange(tab.id)}
             className={cn(
-              "aurora-focus flex shrink-0 items-center gap-1.5 rounded-sm border border-transparent px-2 py-1 font-mono text-[10px] tracking-[0.08em] uppercase transition-colors",
+              "aurora-focus flex shrink-0 items-center gap-1.5 rounded-md border border-transparent px-2.5 py-1.5 text-[12px] font-medium transition-colors",
               active
                 ? "aurora-tab-active"
-                : "text-[var(--a-muted)] hover:bg-white/[0.04] hover:text-[var(--a-text)]",
+                : "text-[var(--a-muted)] hover:bg-white/[0.035] hover:text-[var(--a-text)]",
             )}
           >
             {tab.label}
             {typeof tab.count === "number" ? (
-              <span className="rounded-sm bg-white/[0.07] px-1 text-[9px] tabular-nums">
+              <span className="rounded-full bg-white/[0.07] px-1.5 text-[9.5px] font-normal tabular-nums">
                 {tab.count}
               </span>
             ) : null}
@@ -98,16 +98,16 @@ export function TabBar<T extends string>({
 }
 
 const statusTone: Record<string, string> = {
-  indexed: "border-[#7ee7c7]/30 bg-[#7ee7c7]/10 text-[#a5f3df]",
-  "read-only": "border-white/10 bg-white/[0.04] text-[#9fb9b5]",
-  attached: "border-[#e8c37a]/30 bg-[#e8c37a]/10 text-[#f0d5a2]",
-  unverified: "border-[#e8c37a]/30 bg-[#e8c37a]/10 text-[#f0d5a2]",
-  cached: "border-[#9fd8e8]/25 bg-[#9fd8e8]/10 text-[#c3e8f2]",
-  unavailable: "border-[#ff8a7a]/30 bg-[#ff8a7a]/10 text-[#ffb3a8]",
-  proposed: "border-[#e8c37a]/30 bg-[#e8c37a]/10 text-[#f0d5a2]",
-  approved: "border-[#9fd8e8]/30 bg-[#9fd8e8]/10 text-[#c3e8f2]",
-  applied: "border-[#8be6b0]/30 bg-[#8be6b0]/10 text-[#b6f5cc]",
-  rejected: "border-[#ff8a7a]/30 bg-[#ff8a7a]/10 text-[#ffb3a8]",
+  indexed: "border-[#8fe3aa]/25 bg-[#8fe3aa]/10 text-[#a8edbc]",
+  "read-only": "border-white/10 bg-white/[0.04] text-[#a3a3a8]",
+  attached: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
+  unverified: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
+  cached: "border-[#a9bde8]/25 bg-[#a9bde8]/10 text-[#c4d3f2]",
+  unavailable: "border-[#ff9a8b]/25 bg-[#ff9a8b]/10 text-[#ffb3a8]",
+  proposed: "border-[#f0cf8e]/25 bg-[#f0cf8e]/10 text-[#f2d9a4]",
+  approved: "border-[#a9bde8]/25 bg-[#a9bde8]/10 text-[#c4d3f2]",
+  applied: "border-[#8fe3aa]/25 bg-[#8fe3aa]/10 text-[#a8edbc]",
+  rejected: "border-[#ff9a8b]/25 bg-[#ff9a8b]/10 text-[#ffb3a8]",
 };
 
 export function StatusChip({
@@ -122,7 +122,7 @@ export function StatusChip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-sm border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.1em] uppercase",
+        "inline-flex items-center gap-1.5 rounded-md border px-1.5 py-0.5 font-mono text-[9px] tracking-[0.08em] uppercase",
         statusTone[value] ?? "border-white/10 bg-white/[0.04] text-[var(--a-muted)]",
         className,
       )}
@@ -190,10 +190,10 @@ export function CodeView({
                 (highlight.tone === "added" ? "aurora-diff-add" : "aurora-diff-remove"),
             )}
           >
-            <span className="sticky left-0 w-10 shrink-0 select-none border-r border-[var(--a-line)] bg-[#061113] pr-2 text-right text-[9px] leading-[1.95] text-[var(--a-muted)]/60">
+            <span className="sticky left-0 w-10 shrink-0 select-none border-r border-[var(--a-line)] bg-[#0b0b0d] pr-2 text-right text-[9px] leading-[1.95] text-[#64646a]">
               {startLine + index}
             </span>
-            <span className="whitespace-pre px-3 text-[#c6dcd7]">{line || " "}</span>
+            <span className="whitespace-pre px-3 text-[#d5d5d2]">{line || " "}</span>
           </span>
         ))}
       </code>

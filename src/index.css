@@ -131,20 +131,20 @@
    ───────────────────────────────────────────────────────────── */
 
 .aurora-root {
-  --a-void: #04090a;
-  --a-deep: #071214;
-  --a-panel: rgba(9, 22, 24, 0.78);
-  --a-panel-solid: #081517;
-  --a-line: rgba(126, 220, 201, 0.14);
-  --a-line-strong: rgba(126, 220, 201, 0.28);
-  --a-mint: #7ee7c7;
-  --a-mint-dim: #4a9d8a;
-  --a-ice: #9fd8e8;
-  --a-amber: #e8c37a;
-  --a-red: #ff8a7a;
-  --a-green: #8be6b0;
-  --a-text: #dcefeb;
-  --a-muted: #7f9b98;
+  --a-void: #08080a;
+  --a-deep: #0d0d0f;
+  --a-panel: rgba(19, 19, 21, 0.92);
+  --a-panel-solid: #121214;
+  --a-line: rgba(255, 255, 255, 0.075);
+  --a-line-strong: rgba(255, 255, 255, 0.16);
+  --a-mint: #bdf7d1;
+  --a-mint-dim: #7fbf96;
+  --a-ice: #a9bde8;
+  --a-amber: #f0cf8e;
+  --a-red: #ff9a8b;
+  --a-green: #8fe3aa;
+  --a-text: #ececea;
+  --a-muted: #8f8f94;
   position: fixed;
   inset: 0;
   overflow: hidden;
@@ -242,13 +242,13 @@
 }
 
 .aurora-glass {
-  background: linear-gradient(160deg, rgba(13, 32, 34, 0.82), rgba(6, 16, 18, 0.9));
+  background: rgba(18, 18, 20, 0.9);
   border: 1px solid var(--a-line);
   backdrop-filter: blur(22px) saturate(120%);
 }
 
 .aurora-glass-strong {
-  background: linear-gradient(165deg, rgba(12, 30, 32, 0.97), rgba(5, 13, 15, 0.985));
+  background: rgba(16, 16, 18, 0.97);
   border: 1px solid var(--a-line-strong);
   backdrop-filter: blur(30px) saturate(125%);
 }
@@ -279,17 +279,17 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
-  color: rgba(126, 231, 199, 0.62);
+  color: rgba(189, 247, 209, 0.62);
 }
 
 .aurora-cta {
-  background: linear-gradient(120deg, #9ff0d8, #6fd9c2 55%, #8fcfe0);
-  color: #03201c;
-  border: 1px solid rgba(190, 255, 238, 0.5);
+  background: #c2f6d3;
+  color: #06271a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   transition: filter 160ms ease, transform 160ms ease;
 }
 .aurora-cta:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.06);
 }
 .aurora-cta:active {
   transform: translateY(1px);
@@ -298,12 +298,12 @@
 .aurora-outline-btn {
   border: 1px solid var(--a-line-strong);
   color: var(--a-text);
-  background: rgba(126, 220, 201, 0.04);
+  background: rgba(255, 255, 255, 0.02);
   transition: background 150ms ease, border-color 150ms ease;
 }
 .aurora-outline-btn:hover {
-  background: rgba(126, 220, 201, 0.1);
-  border-color: rgba(126, 220, 201, 0.42);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.26);
 }
 
 .aurora-nucleus-ring {
@@ -329,72 +329,70 @@
 }
 
 .aurora-window {
-  background: linear-gradient(175deg, rgba(9, 23, 25, 0.985), rgba(4, 11, 13, 0.99));
-  outline: 1px solid rgba(126, 220, 201, 0.24);
+  background: #0d0d0f;
+  outline: 1px solid rgba(255, 255, 255, 0.12);
   outline-offset: 0;
-  backdrop-filter: blur(30px) saturate(120%);
   box-shadow:
     0 24px 70px -28px rgba(0, 0, 0, 0.9),
-    0 0 60px -24px rgba(94, 220, 193, 0.22);
+    0 0 60px -30px rgba(0, 0, 0, 0.8);
 }
 
 .aurora-window-max {
-  outline-color: rgba(126, 220, 201, 0.16);
+  outline-color: rgba(255, 255, 255, 0.09);
   box-shadow: none;
 }
 
 .aurora-diff-remove {
-  background: rgba(255, 122, 104, 0.08);
-  border-left: 2px solid rgba(255, 138, 122, 0.65);
+  background: rgba(248, 113, 113, 0.08);
+  border-left: 1px solid rgba(248, 113, 113, 0.5);
 }
 .aurora-diff-add {
-  background: rgba(139, 230, 176, 0.07);
-  border-left: 2px solid rgba(139, 230, 176, 0.65);
+  background: rgba(74, 222, 128, 0.08);
+  border-left: 1px solid rgba(74, 222, 128, 0.5);
 }
 
 .aurora-code-surface {
-  background:
-    linear-gradient(180deg, rgba(5, 14, 16, 0.9), rgba(4, 11, 13, 0.96));
+  background: #0b0b0d;
 }
 
 .aurora-pane-head {
-  background: linear-gradient(180deg, rgba(14, 34, 36, 0.65), rgba(8, 21, 23, 0.2));
-  border-bottom: 1px solid rgba(126, 220, 201, 0.1);
+  background: #111113;
+  border-bottom: 1px solid var(--a-line);
 }
 
 .aurora-railtab {
-  color: rgba(127, 155, 152, 0.9);
+  color: rgba(160, 160, 166, 0.92);
   transition: color 140ms ease, background 140ms ease;
 }
 .aurora-railtab:hover {
   color: var(--a-text);
-  background: rgba(126, 220, 201, 0.05);
+  background: rgba(255, 255, 255, 0.04);
 }
 .aurora-railtab-active {
   color: var(--a-mint);
-  background: rgba(126, 220, 201, 0.08);
+  background: rgba(255, 255, 255, 0.055);
   box-shadow: inset 2px 0 0 var(--a-mint);
 }
 
 .aurora-tab-active {
-  color: var(--a-mint);
-  border-color: var(--a-mint);
-  background: rgba(126, 220, 201, 0.07);
+  color: var(--a-text);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .aurora-scroll {
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(126, 220, 201, 0.22) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
   overscroll-behavior: contain;
 }
 .aurora-scroll::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 .aurora-scroll::-webkit-scrollbar-thumb {
-  background: rgba(126, 220, 201, 0.2);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 999px;
 }
 .aurora-scroll::-webkit-scrollbar-track {
@@ -403,7 +401,7 @@
 
 .aurora-divider {
   position: relative;
-  background: rgba(126, 220, 201, 0.06);
+  background: #0a0a0c;
   transition: background 120ms ease;
   touch-action: none;
 }
@@ -412,7 +410,7 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  background: rgba(126, 220, 201, 0.25);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 999px;
 }
 .aurora-divider-x::after {
@@ -430,11 +428,11 @@
   cursor: col-resize;
 }
 .aurora-divider:hover {
-  background: rgba(126, 220, 201, 0.16);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .aurora-focus:focus-visible {
-  outline: 1px solid rgba(126, 231, 199, 0.7);
+  outline: 1px solid rgba(189, 247, 209, 0.7);
   outline-offset: 2px;
 }
 
@@ -447,7 +445,7 @@
   height: 5px;
   border-radius: 999px;
   background: var(--a-mint);
-  box-shadow: 0 0 8px rgba(126, 231, 199, 0.8);
+  box-shadow: 0 0 8px rgba(189, 247, 209, 0.6);
 }
 
 @keyframes aurora-drift {
